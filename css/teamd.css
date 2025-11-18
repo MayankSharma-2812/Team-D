@@ -1309,3 +1309,13 @@ textarea.form-control {
         margin-bottom: 20px;
     }
 }
+
+@media (max-width: 375px) {
+    .links-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        margin-bottom: 20px;
+    }
+}
