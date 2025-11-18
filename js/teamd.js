@@ -3,6 +3,108 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeBtn = document.querySelector('.close-btn');
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabPanes = document.querySelectorAll('.tab-pane');
+    
+    // Search functionality for team members
+    const actorSearch = document.getElementById('actorSearch');
+    if (actorSearch) {
+        const allSections = document.querySelectorAll('.mentors-section');
+        const mentorCards = document.querySelectorAll('.mentor-card');
+        let resultsCount = document.querySelector('.search-results-count');
+        
+        if (!resultsCount) {
+            resultsCount = document.createElement('div');
+            resultsCount.className = 'search-results-count';
+            document.querySelector('.search-wrapper').appendChild(resultsCount);
+        }
+        
+        actorSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            let visibleCount = 0;
+            
+            // Show all cards and sections first
+            mentorCards.forEach(card => {
+                card.style.display = 'flex';
+                card.closest('.mentors-grid').style.display = 'grid';
+                card.closest('.mentors-section').style.display = 'block';
+            });
+            
+            // If search term is empty, show all and reset
+            if (searchTerm === '') {
+                resultsCount.textContent = '';
+                return;
+            }
+            
+            // Filter cards
+            mentorCards.forEach(card => {
+                const name = card.querySelector('.mentor-info span').textContent.toLowerCase();
+                const role = card.querySelector('.mentor-info p').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || role.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Update results count
+            resultsCount.textContent = `${visibleCount} ${visibleCount === 1 ? 'result' : 'results'} found`;
+            
+            // Handle section visibility
+            allSections.forEach(section => {
+                const visibleCards = section.querySelectorAll('.mentor-card[style="display: flex;"]');
+                const grid = section.querySelector('.mentors-grid');
+                const noResultsMsg = section.querySelector('.no-results-message');
+                
+                // Remove any existing no results messages
+                if (noResultsMsg) {
+                    noResultsMsg.remove();
+                }
+                
+                if (visibleCards.length === 0) {
+                    // Hide the section if no cards are visible
+                    section.style.display = 'none';
+                } else {
+                    section.style.display = 'block';
+                    grid.style.display = 'grid';
+                    
+                    // Add a divider between sections
+                    if (section.previousElementSibling && 
+                        section.previousElementSibling.classList.contains('mentors-section')) {
+                        section.style.marginTop = '40px';
+                        section.style.paddingTop = '30px';
+                        section.style.borderTop = '1px solid #333';
+                    }
+                }
+            });
+            
+            // Show no results message if nothing found
+            if (visibleCount === 0) {
+                const mainContainer = document.querySelector('.team-section');
+                let noResultsMsg = document.getElementById('noResultsMsg');
+                
+                if (!noResultsMsg) {
+                    noResultsMsg = document.createElement('div');
+                    noResultsMsg.id = 'noResultsMsg';
+                    noResultsMsg.style.gridColumn = '1 / -1';
+                    noResultsMsg.style.textAlign = 'center';
+                    noResultsMsg.style.padding = '40px 20px';
+                    noResultsMsg.style.color = '#a3a3a3';
+                    noResultsMsg.innerHTML = `
+                        <i class="fas fa-search" style="font-size: 2.5rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <h3 style="color: #fff; margin-bottom: 10px;">No matching team members found</h3>
+                        <p>Try different keywords or check the spelling</p>
+                    `;
+                    mainContainer.appendChild(noResultsMsg);
+                }
+            } else {
+                const noResultsMsg = document.getElementById('noResultsMsg');
+                if (noResultsMsg) {
+                    noResultsMsg.remove();
+                }
+            }
+        });
+    }
 
     // Close button functionality
     closeBtn.addEventListener('click', function () {

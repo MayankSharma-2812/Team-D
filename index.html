@@ -1,64 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Who's watching?</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/png" href="assests/icons/logo.png" />
+
     <style>
-        .fade-out {
-            animation: fadeOut 0.5s ease-out forwards;
+      .fade-out {
+        animation: fadeOut 0.5s ease-out forwards;
+      }
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
         }
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
+        to {
+          opacity: 0;
         }
+      }
     </style>
-</head>
-<body onload="document.body.style.opacity='1'">
+  </head>
+  <body onload="document.body.style.opacity='1'">
     <div class="container">
-        <h1>Who's watching?</h1>
-        <div class="profiles">
-            <a href="profile1.html" class="profile" onclick="navigateTo('profile1.html')">
-                <div class="profile-img">
-                    <img src="assests/icons/Team A.png" alt="Team A">
-                </div>
-                <span>Team A</span>
-            </a>
-            <a href="profile2.html" class="profile">
-                <div class="profile-img">
-                    <img src="assests/icons/Team B.png" alt="Team B">
-                </div>
-                <span>Team B</span>
-            </a>
-            <a href="kids.html" class="profile">
-                <div class="profile-img">
-                    <img src="assests/icons/Team C.png" alt="Team C">
-                </div>
-                <span>Team C</span>
-            </a>
-             <a href="#" class="profile" onclick="navigateTo('homepage.html')">
-                <div class="profile-img">
-                    <img src="assests/icons/Team D.png" alt="Team D">
-                </div>
-                <span>Team D</span>
-            </a>
-        </div>
-        <button class="manage-btn">MANAGE PROFILES</button>
+      <h1>Who's watching?</h1>
+      <div class="profiles">
+        <a
+          href="profile1.html"
+          class="profile"
+          onclick="navigateTo('profile1.html')"
+        >
+          <div class="profile-img">
+            <img src="assests/icons/Team A.png" alt="Team A" />
+          </div>
+          <span>Team A</span>
+        </a>
+        <a href="profile2.html" class="profile">
+          <div class="profile-img">
+            <img src="assests/icons/Team B.png" alt="Team B" />
+          </div>
+          <span>Team B</span>
+        </a>
+        <a href="kids.html" class="profile">
+          <div class="profile-img">
+            <img src="assests/icons/Team C.png" alt="Team C" />
+          </div>
+          <span>Team C</span>
+        </a>
+        <a href="#" class="profile" onclick="navigateTo('homepage.html')">
+          <div class="profile-img">
+            <img src="assests/icons/Team D.png" alt="Team D" />
+          </div>
+          <span>Team D</span>
+        </a>
+      </div>
+      <button class="manage-btn">MANAGE PROFILES</button>
     </div>
     <script>
-        // Add fade-in effect on page load
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.5s ease-in';
-        
-        // Add fade-out effect before navigation
-        function navigateTo(url) {
-            document.body.classList.add('fade-out');
-            setTimeout(function() {
-                window.location.href = url;
-            }, 500); // Match this with the animation duration
-            return false;
-        }
+      // Add fade-in effect on page load
+      document.body.style.opacity = "0";
+      document.body.style.transition = "opacity 0.5s ease-in";
+
+      // Add fade-out effect before navigation
+      function navigateTo(url) {
+        document.body.classList.add("fade-out");
+        setTimeout(function () {
+          window.location.href = url;
+        }, 500); // Match this with the animation duration
+        return false;
+      }
     </script>
-</body>
+  </body>
 </html>
