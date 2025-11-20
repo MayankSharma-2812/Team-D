@@ -664,3 +664,117 @@ body {
     font-size: 28px;
   }
 }
+
+/* 🔥 Better responsiveness for all mobile screens */
+
+/* --- TABLETS (≤ 1024px) --- */
+@media (max-width: 1024px) {
+  .featured {
+    padding: 40px 40px;
+    height: 85vh;
+  }
+
+  .featured h1 {
+    font-size: 5vw;
+    max-width: 80%;
+  }
+
+  .trending-now {
+    padding: 0 40px 40px;
+  }
+}
+
+/* --- SMALL TABLETS & LANDSCAPE PHONES (≤ 768px) --- */
+@media (max-width: 768px) {
+  /* Sidebar shrinks to icon-only */
+  .sidebar {
+    width: 70px;
+    overflow: hidden;
+  }
+
+  .sidebar nav li span {
+    display: none;
+  }
+
+  .main-content {
+    padding-left: 70px;
+  }
+
+  .featured {
+    padding: 30px 20px;
+    height: 80vh;
+  }
+
+  .featured h1 {
+    font-size: 7vw;
+  }
+
+  .description {
+    font-size: 3.6vw;
+    max-width: 90%;
+  }
+}
+
+/* --- PHONES (≤ 480px) --- */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .main-content {
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .sidebar {
+    display: none; /* Hide sidebar completely */
+  }
+
+  .featured {
+    padding: 20px 15px;
+    height: auto;
+    padding-bottom: 60px;
+  }
+
+  .featured h1 {
+    font-size: 8vw;
+    max-width: 100%;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .play-btn,
+  .info-btn {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .carousel {
+    gap: 10px;
+  }
+
+  .carousel-item {
+    width: 140px;
+    height: 90px;
+  }
+}
+
+/* --- EXTRA SMALL PHONES (≤ 360px) --- */
+@media (max-width: 360px) {
+  .featured h1 {
+    font-size: 9vw;
+  }
+
+  .play-btn,
+  .info-btn {
+    font-size: 14px;
+  }
+
+  .carousel-item {
+    width: 120px;
+    height: 75px;
+  }
+}

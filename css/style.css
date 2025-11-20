@@ -161,3 +161,94 @@ h1 {
     padding: 0.8em 2em;
   }
 }
+
+
+/* ===== Tablets & Small Laptops (<= 800px) ===== */
+@media (max-width: 800px) {
+  body {
+    padding: 30px 20px;
+  }
+
+  h1 {
+    font-size: 5.5vw;
+    margin-bottom: 1.8em;
+  }
+
+  .profiles {
+    gap: 4vw;
+  }
+
+  .profile {
+    width: 22vw;
+    min-width: 100px;
+  }
+
+  .profile span {
+    font-size: 2.2vw;
+  }
+
+  .manage-btn {
+    font-size: 2vw;
+    padding: 0.6em 1.8em;
+  }
+}
+
+/* ===== Phones (<= 500px) ===== */
+@media (max-width: 500px) {
+  body {
+    align-items: flex-start;
+    padding: 40px 16px;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 7vw;
+    margin-bottom: 1.5em;
+  }
+
+  .profiles {
+    gap: 6vw;
+  }
+
+  .profile {
+    width: 34vw;
+    min-width: 120px;
+  }
+
+  .profile span {
+    font-size: 3.4vw;
+  }
+
+  .profile-img.add span {
+    font-size: 10vw;
+  }
+
+  .manage-btn {
+    font-size: 3.4vw;
+    padding: 0.8em 2.2em;
+    letter-spacing: 1px;
+  }
+}
+
+/* ===== Extra Small Devices (<= 360px) ===== */
+@media (max-width: 360px) {
+  h1 {
+    font-size: 8vw;
+  }
+
+  .profile {
+    width: 40vw;
+  }
+
+  .profile span {
+    font-size: 3.8vw;
+  }
+
+  .manage-btn {
+    width: 100%;
+    max-width: 260px;
+  }
+}
