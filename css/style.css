@@ -1,3 +1,19 @@
+:root{
+  /* Easy theme tuning */
+  --bg: #141414;
+  --muted: #808080;
+  --panel: #333333;
+  --text: #ffffff;
+  --accent: #ffffff;
+  --max-width: 1200px;
+
+  /* sizing */
+  --container-padding: 20px;
+  --profile-border-radius: 6px;
+  --profile-gap: 2.5vw;
+}
+
+/* Reset + base */
 * {
   margin: 0;
   padding: 0;
@@ -5,250 +21,257 @@
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
-  background-color: #141414;
-  color: #fff;
+  background-color: var(--bg);
+  color: var(--text);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: var(--container-padding);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 180ms linear;
 }
 
+/* Container */
 .container {
   text-align: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 
+/* Headline: responsive with clamp */
 h1 {
-  color: #fff;
-  font-size: 3.5vw;
+  color: var(--text);
   font-weight: 400;
-  margin-bottom: 2em;
+  margin-bottom: 1.8em;
+  /* scale smoothly between 24px and 56px */
+  font-size: clamp(24px, 3.5vw, 56px);
+  line-height: 1.05;
 }
 
+/* Profiles layout */
 .profiles {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 2vw;
-  margin-bottom: 4em;
+  gap: var(--profile-gap);
+  margin-bottom: 3.5em;
+  align-items: flex-start; /* keeps equal alignment when labels wrap */
 }
 
+/* Each profile is an anchor */
 .profile {
-  color: #808080;
+  color: var(--muted);
   text-decoration: none;
-  transition: all 0.3s ease;
-  width: 12vw;
-  max-width: 200px;
-  min-width: 84px;
+  transition: transform 220ms ease, color 220ms ease;
+  width: clamp(80px, 12vw, 200px);
+  min-width: 80px;
+  display: inline-block; /* so width works predictably */
+  text-align: center;
+  outline: none;
 }
 
+/* Make whole anchor reachable via keyboard (improves hit area) */
+.profile:focus-visible,
 .profile:hover {
-  color: #fff;
+  color: var(--text);
   transform: scale(1.05);
 }
 
-.profile:hover .profile-img {
-  border-color: #fff;
-}
-
+/* Profile image container */
 .profile-img {
   width: 100%;
-  aspect-ratio: 1;
-  border-radius: 4px;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--profile-border-radius);
   border: 3px solid transparent;
   margin-bottom: 0.6em;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #333;
-  transition: all 0.3s ease;
+  background-color: var(--panel);
+  transition: border-color 220ms ease, background-color 220ms ease, transform 220ms ease;
 }
 
+/* When hovering/focusing parent, change border color */
+.profile:hover .profile-img,
+.profile:focus-visible .profile-img {
+  border-color: var(--accent);
+}
+
+/* Image: remove inline gaps and ensure cover */
 .profile-img img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* "Add profile" style */
 .profile-img.add {
   background-color: transparent;
-  border: 2px dashed #808080;
+  border: 2px dashed var(--muted);
   position: relative;
+  min-height: 0; /* keep square via aspect-ratio */
+  align-items: center;
 }
 
 .profile-img.add span {
-  color: #808080;
-  font-size: 4vw;
+  color: var(--muted);
+  /* bigger icon/text inside add card; responsive */
+  font-size: clamp(20px, 4vw, 40px);
   font-weight: 200;
-  transition: all 0.3s ease;
+  transition: color 200ms ease;
 }
 
-.profile:hover .profile-img.add span {
-  color: #fff;
+.profile:hover .profile-img.add span,
+.profile:focus-visible .profile-img.add span {
+  color: var(--accent);
 }
 
+/* Profile label */
 .profile span {
   display: block;
-  font-size: 1.3vw;
+  /* responsive label size */
+  font-size: clamp(12px, 1.3vw, 16px);
   margin-top: 0.6em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
+/* Manage button */
 .manage-btn {
   background: transparent;
-  border: 1px solid #808080;
-  color: #808080;
+  border: 1px solid var(--muted);
+  color: var(--muted);
   padding: 0.5em 1.5em;
-  font-size: 1.1vw;
+  font-size: clamp(12px, 1.1vw, 16px);
   letter-spacing: 2px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: border-color 180ms ease, color 180ms ease, transform 120ms ease;
   text-transform: uppercase;
+  border-radius: 4px;
 }
 
-.manage-btn:hover {
-  border-color: #fff;
-  color: #fff;
+/* Hover & focus for manage button */
+.manage-btn:hover,
+.manage-btn:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+  outline: none;
 }
 
-/* Responsive adjustments */
+/* Accessibility: visible focus outlines for keyboard users */
+:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
+  border-radius: 4px;
+}
+
+/* Responsive breakpoints
+   consolidated and ordered from largest to smallest.
+*/
+
+/* Medium screens - tablets & small laptops */
 @media (max-width: 800px) {
-  h1 {
-    font-size: 5vw;
-  }
-
-  .profiles {
-    gap: 4vw;
-  }
-
-  .profile {
-    width: 20vw;
-  }
-
-  .profile span {
-    font-size: 2vw;
-  }
-
-  .manage-btn {
-    font-size: 2vw;
-  }
-}
-
-@media (max-width: 500px) {
-  h1 {
-    font-size: 7vw;
-    margin-bottom: 1.5em;
-  }
-
-  .profiles {
-    gap: 5vw;
-  }
-
-  .profile {
-    width: 30vw;
-  }
-
-  .profile span {
-    font-size: 3vw;
-  }
-
-  .manage-btn {
-    font-size: 3vw;
-    padding: 0.8em 2em;
-  }
-}
-
-
-/* ===== Tablets & Small Laptops (<= 800px) ===== */
-@media (max-width: 800px) {
-  body {
-    padding: 30px 20px;
+  :root {
+    --profile-gap: 4vw;
+    --container-padding: 30px;
   }
 
   h1 {
-    font-size: 5.5vw;
-    margin-bottom: 1.8em;
-  }
-
-  .profiles {
-    gap: 4vw;
+    /* slightly larger relative headline on medium screens */
+    font-size: clamp(22px, 5.5vw, 48px);
+    margin-bottom: 1.6em;
   }
 
   .profile {
-    width: 22vw;
+    width: clamp(100px, 22vw, 220px);
     min-width: 100px;
   }
 
   .profile span {
-    font-size: 2.2vw;
+    font-size: clamp(13px, 2.2vw, 18px);
   }
 
   .manage-btn {
-    font-size: 2vw;
+    font-size: clamp(13px, 2vw, 16px);
     padding: 0.6em 1.8em;
   }
 }
 
-/* ===== Phones (<= 500px) ===== */
+/* Small screens - phones */
 @media (max-width: 500px) {
-  body {
-    align-items: flex-start;
-    padding: 40px 16px;
+  :root{
+    --profile-gap: 6vw;
+    --container-padding: 40px 16px;
   }
 
-  .container {
-    text-align: center;
+  body {
+    align-items: flex-start;
   }
 
   h1 {
-    font-size: 7vw;
-    margin-bottom: 1.5em;
+    font-size: clamp(20px, 7vw, 40px);
+    margin-bottom: 1.2em;
   }
 
   .profiles {
-    gap: 6vw;
+    gap: var(--profile-gap);
   }
 
   .profile {
-    width: 34vw;
+    width: clamp(120px, 34vw, 180px);
     min-width: 120px;
   }
 
   .profile span {
-    font-size: 3.4vw;
+    font-size: clamp(14px, 3.4vw, 18px);
   }
 
   .profile-img.add span {
-    font-size: 10vw;
+    font-size: clamp(24px, 10vw, 48px);
   }
 
   .manage-btn {
-    font-size: 3.4vw;
+    font-size: clamp(14px, 3.4vw, 18px);
     padding: 0.8em 2.2em;
     letter-spacing: 1px;
   }
 }
 
-/* ===== Extra Small Devices (<= 360px) ===== */
+/* Extra small devices */
 @media (max-width: 360px) {
   h1 {
-    font-size: 8vw;
+    font-size: clamp(18px, 8vw, 30px);
   }
 
   .profile {
-    width: 40vw;
+    width: clamp(120px, 40vw, 160px);
   }
 
   .profile span {
-    font-size: 3.8vw;
+    font-size: clamp(14px, 3.8vw, 16px);
   }
 
   .manage-btn {
     width: 100%;
     max-width: 260px;
+  }
+}
+
+/* Respect user's preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
   }
 }
